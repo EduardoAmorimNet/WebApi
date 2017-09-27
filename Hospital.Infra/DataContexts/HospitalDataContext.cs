@@ -1,4 +1,5 @@
 ﻿using Hospital.Domain;
+using Hospital.Infra.Mappings;
 using System;
 using System.Data.Entity;
 
@@ -15,6 +16,14 @@ namespace Hospital.Infra
 
         public DbSet<Medicos> Medicos { get; set; }
         public DbSet<Planos> Planos { get; set; }
+
+        //Especificação par ao mapeamento do banco assim que gerado
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new MedicosMap());
+            modelBuilder.Configurations.Add(new PlanosMap());
+            base.OnModelCreating(modelBuilder);
+        }
     }
 
 
